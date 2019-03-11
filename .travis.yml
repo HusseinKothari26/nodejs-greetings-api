@@ -1,3 +1,12 @@
 language: node_js
 node_js:
  - "node"
+ 
+deploy:
+      - provider: codedeploy
+        revision_type: github
+        access_key_id: AKIAI3HSBK5GVBS5VCXA
+        secret_access_key: 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
+        application: nodejs-greetings-api
+        deployment_group: DemoFleet
+        region: us-east-1
