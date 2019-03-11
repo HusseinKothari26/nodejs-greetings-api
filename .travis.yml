@@ -2,11 +2,30 @@ language: node_js
 node_js:
  - "node"
  
+cache:
+  directories:
+    - node_modules
 deploy:
-      - provider: codedeploy
-        revision_type: github
-        access_key_id: AKIAI3HSBK5GVBS5VCXA
-        secret_access_key: 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
-        application: nodejs-greetings-api
-        deployment_group: nodejs-greetings-api-dg
-        region: us-east-1
+- provider: s3
+  access_key_id: AKIAI3HSBK5GVBS5VCXA
+  secret_access_key: 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
+  local_dir: dpl_cd_upload
+  skip_cleanup: true
+  on: &2
+    repo: HusseinKothari26/nodejs-greetings-api
+  bucket: nodejs-greetings-api-s3
+  region: us-east-1
+- provider: codedeploy
+  access_key_id: AKIAI3HSBK5GVBS5VCXA
+  secret_access_key: 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
+  bucket: nodejs-greetings-api-s3
+  key: latest.zip
+  bundle_type: zip
+  application: nodejs-greetings-api
+  deployment_group: nodejs-greetings-api-dg
+  region: us-east-1
+  on: *2
+script:
+  - zip -r latest *
+  - mkdir -p dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/latest.zip
