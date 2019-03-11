@@ -8,5 +8,5 @@ deploy:
         access_key_id: AKIAI3HSBK5GVBS5VCXA
         secret_access_key: 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
         application: nodejs-greetings-api
-        deployment_group: DemoFleet
+        deployment_group: nodejs-greetings-api-dg
         region: us-east-1
