@@ -7,8 +7,8 @@ cache:
     - node_modules
 deploy:
 - provider: s3
-  access_key_id: AKIAI3HSBK5GVBS5VCXA
-  secret_access_key: 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
+  access_key_id: ${AWS_ACCESS_KEY}
+  secret_access_key: ${AWS_SECRET_KEY}
   local_dir: dpl_cd_upload
   skip_cleanup: true
   on: &2
@@ -16,8 +16,8 @@ deploy:
   bucket: nodejs-greetings-api-s3
   region: us-east-1
 - provider: codedeploy
-  access_key_id: AKIAI3HSBK5GVBS5VCXA
-  secret_access_key: 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
+  access_key_id: ${AWS_ACCESS_KEY}
+  secret_access_key: ${AWS_SECRET_KEY}
   bucket: nodejs-greetings-api-s3
   key: latest.zip
   bundle_type: zip
